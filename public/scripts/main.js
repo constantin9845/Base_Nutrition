@@ -27,7 +27,7 @@ welcomeBtn2.addEventListener('click', function(){
     welcomeContainer.style.zIndex = '-5';
 
     aboutContainer.style.transition = '0.3s ease-in all';
-    aboutContainer.style.opacity = '1';
+    aboutContainer.style.opacity = '0.9';
     aboutContainer.style.zIndex = '10';
 });
 
@@ -37,7 +37,7 @@ welcomeBtn3.addEventListener('click', function(){
     welcomeContainer.style.zIndex = '-5';
 
     educationContainer.style.transition = '0.3s ease-in all';
-    educationContainer.style.opacity = '1';
+    educationContainer.style.opacity = '0.9';
     educationContainer.style.zIndex = '10';
 });
 
@@ -56,7 +56,7 @@ function returnWelcome(){
     educationContainer.style.zIndex = '-5';
 
     welcomeContainer.style.transition = '0.3s ease-in all';
-    welcomeContainer.style.opacity = '1';
+    welcomeContainer.style.opacity = '0.9';
     welcomeContainer.style.zIndex = '10';
 };
 
@@ -79,6 +79,44 @@ navLinkHome.addEventListener('click', ()=>{
 })
 
 
-// DESIGN APPLICATION PART 
-// IDEA: 2 SECTIONS --> 1 FOR SEARCHING / 1 FOR DISPLAYING THE RESULTS AND INFORMATION / 
-// A LIST OF TOTALS, MULTIPLE SEARHCES!
+// REQUESTS FOR DATA
+let searchBtn = document.querySelector('#submit_search');
+searchBtn.addEventListener('click', function(){
+    let searchInput = $('#search_key').val()
+
+    if(searchInput == ''){
+        alert('Enter Product');
+    }
+    else{
+        $.ajax({
+            url: '/get_data',
+            type: 'GET',
+            data: {
+                searchKey: searchInput
+            },
+            success: function(data){
+                if(data.status == false){
+                    alert('No Data found.');
+                }
+                if(data.status == true){
+                    document.querySelector('#single_summary_title').innerHTML = data.searchQuery;
+                    document.querySelector('#fat').innerHTML = `${data.fat}g`;
+                    document.querySelector('#saturatedFat').innerHTML = `${data.saturatedFat}g`;
+                    document.querySelector('#cholesterol').innerHTML = `${data.cholesterol}mg`;
+                    document.querySelector('#sodium').innerHTML = `${data.sodium}mg`;
+                    document.querySelector('#carbohydrates').innerHTML = `${data.carbohydrates}g`;
+                    document.querySelector('#fiber').innerHTML = `${data.fiber}g`;
+                    document.querySelector('#sugars').innerHTML = `${data.sugars}g`;
+                    document.querySelector('#protein').innerHTML = `${data.protein}g`;
+                    document.querySelector('#calcium').innerHTML = `${data.calcium}mg`;
+                    document.querySelector('#iron').innerHTML = `${data.iron}mg`;
+                    document.querySelector('#calories').innerHTML = `${data.calories}kcal`;
+                }
+            },
+            error: function (request, status, error) {
+                console.log(request.responseText);
+            }
+        })
+    }
+})
+
