@@ -54,7 +54,7 @@
             <input type="text" id="search_key" placeholder="Search Product">
             <p id="submit_search">Search</p>
             <div class="single_summary">
-              <h2 id="single_summary_title">Apple</h2>
+              <h2 id="single_summary_title"></h2>
               <table>
                 <tr>
                   <th>Nutrient</th>
@@ -62,7 +62,7 @@
                 </tr>
                 <tr>
                   <td>Fat</td>
-                  <td class="amount_td" id="fat">1.0g</td>
+                  <td class="amount_td" id="fat">0.0g</td>
                 </tr>
                 <tr>
                   <td>Saturated Fat</td>
@@ -78,15 +78,15 @@
                 </tr>
                 <tr>
                   <td>Carbohydrates</td>
-                  <td class="amount_td" id="carbohydrates">22.0g</td>
+                  <td class="amount_td" id="carbohydrates">0.0g</td>
                 </tr>
                 <tr>
                   <td>Fiber</td>
-                  <td class="amount_td" id="fiber">4.93g</td>
+                  <td class="amount_td" id="fiber">0.0g</td>
                 </tr>
                 <tr>
                   <td>Sugars</td>
-                  <td class="amount_td" id="sugars">16.0g</td>
+                  <td class="amount_td" id="sugars">0.0g</td>
                 </tr>
                 <tr>
                   <td>Protein</td>
@@ -98,11 +98,16 @@
                 </tr>
                 <tr>
                   <td>Iron</td>
-                  <td class="amount_td" id="iron">0.354mg</td>
+                  <td class="amount_td" id="iron">0.0mg</td>
                 </tr>
                 <tr>
                   <td>Calories</td>
-                  <td class="amount_td" id="calories">80.1kcal</td>
+                  <td class="amount_td" id="calories">0.0kcal</td>
+                </tr>
+                <tr>
+                  <td style="font-size: 11px;">
+                    U.S. Department of Agriculture, Agricultural Research Service. FoodData Central, 2019. fdc.nal.usda.gov.
+                  </td>
                 </tr>
               </table>
               <p id="add_product">Add To list</p>
@@ -112,13 +117,11 @@
             <h2>Added Products:</h2>
             <div class="products_container">
               <div class="products_list">
-                <ul>
-                  <li>Apple</li>
-                  <li>Beans</li>
-                  <li>Milk</li>
+                <ul class="products_list_ul">
+                  
                 </ul>
                 <div class="reset_summary">
-                  <p>Reset</p>
+                  <p id="reset_summary_btn">Reset</p>
                 </div>
               </div>
               <div class="products_totals">
@@ -130,19 +133,19 @@
                   </tr>
                   <tr>
                     <td>Calories</td>
-                    <td class="second_col">#Amount</td>
+                    <td id="total_calories" class="second_col">0.0kcal</td>
                   </tr>
                   <tr>
                     <td>Fat</td>
-                    <td class="second_col">#Amount</td>
+                    <td id="total_fat" class="second_col">0.0g</td>
                   </tr>
                   <tr>
                     <td>Protein</td>
-                    <td class="second_col">#Amount</td>
+                    <td id="total_protein" class="second_col">0.0g</td>
                   </tr>
                   <tr>
                     <td>Carbohydrates</td>
-                    <td class="2nd_col">#Amount</td>
+                    <td id="total_carbohydrates" class="2nd_col">0.0g</td>
                   </tr>
                 </table>
               </div>

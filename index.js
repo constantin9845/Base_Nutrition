@@ -13,7 +13,6 @@ const baseUrl = 'https://api.nal.usda.gov/fdc/v1';
 
 client.get('/get_data', (req,res)=>{
     var searchQuery = req.query.searchKey;
-    console.log(searchQuery);
 
     async function searchFoods(searchQuery) {
       try {
@@ -41,7 +40,6 @@ client.get('/get_data', (req,res)=>{
           const foodDetails = await getFoodDetails(firstFood.fdcId);
           return foodDetails; // Return foodDetails here
         } else {
-          console.log('No matching foods found.');
           return null; // Return null when no matching foods are found
         }
       } catch (error) {
@@ -49,31 +47,10 @@ client.get('/get_data', (req,res)=>{
         return null; // Return null on error as well
       }
     }
-    
-    (async () => {
-      let x = await main();
-      if (x) {
-        // Use the foodDetails here or do something else with it
-        return x;
-      } else {
-        x = 'No details found';
-        return x;
-      }
-
-    })();
 
     let resultFromIIFE = (async () => {
       let x = await main();
       if (x) {
-        return x;
-      } else {
-        return null;
-      }
-    })();
-
-    resultFromIIFE.then(x => {
-      if (x) {
-        console.log('Accessed Result:', x['labelNutrients']);
 
         if(x['labelNutrients'] == undefined){
           // NO VALID RESULT
@@ -113,13 +90,12 @@ client.get('/get_data', (req,res)=>{
                     fiber:fiber, sugars:sugars, protein:protein, calcium:calcium, iron:iron, calories:calories
           })
         }
-
       } else {
         // NO VALID RESULT
         console.log('No food details available.');
         res.json({status:false})
       }
-    });
+    })();
 })
 
 client.get('/', (req,res)=>{

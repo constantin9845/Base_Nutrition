@@ -81,6 +81,36 @@ navLinkHome.addEventListener('click', ()=>{
 
 // REQUESTS FOR DATA
 let searchBtn = document.querySelector('#submit_search');
+let searchData;
+
+let accumulatedData = {
+    fat: 0,
+    saturatedFat: 0,
+    cholesterol: 0,
+    sodium: 0,
+    carbohydrates: 0,
+    fiber: 0,
+    sugars: 0,
+    protein: 0,
+    calcium: 0,
+    iron: 0,
+    calories: 0
+};
+
+let lastData = {
+    fat: 0,
+    saturatedFat: 0,
+    cholesterol: 0,
+    sodium: 0,
+    carbohydrates: 0,
+    fiber: 0,
+    sugars: 0,
+    protein: 0,
+    calcium: 0,
+    iron: 0,
+    calories: 0
+};
+
 searchBtn.addEventListener('click', function(){
     let searchInput = $('#search_key').val()
 
@@ -99,7 +129,20 @@ searchBtn.addEventListener('click', function(){
                     alert('No Data found.');
                 }
                 if(data.status == true){
-                    document.querySelector('#single_summary_title').innerHTML = data.searchQuery;
+                    
+                    for(let key in accumulatedData){
+                        if(accumulatedData.hasOwnProperty(key)){
+                            if(data[key] != '-'){
+                                accumulatedData[key] = accumulatedData[key] + data[key];
+                                lastData[key] = data[key];
+                            }
+                            else{
+                                accumulatedData[key] = accumulatedData[key];
+                            }
+                        }
+                    }
+
+                    document.querySelector('#single_summary_title').innerHTML = `${data.searchQuery} (100g)`;
                     document.querySelector('#fat').innerHTML = `${data.fat}g`;
                     document.querySelector('#saturatedFat').innerHTML = `${data.saturatedFat}g`;
                     document.querySelector('#cholesterol').innerHTML = `${data.cholesterol}mg`;
@@ -118,5 +161,93 @@ searchBtn.addEventListener('click', function(){
             }
         })
     }
+});
+
+
+// ADD ITEM TO SUMMARY LIST
+let addBtn = document.querySelector('#add_product');
+
+addBtn.addEventListener('click', function(){
+
+    // CHECK IF ITEM IS ADDED TWICE
+    let summaryList = document.querySelector('.products_list_ul');
+
+    let lastListItem = summaryList.lastElementChild;
+
+    // ITEM ADDED MULTIPLE TIMES
+    try{
+        if(lastListItem.innerHTML.startsWith(document.querySelector('#single_summary_title').innerHTML.substring(0,4))){
+            lastListItem.innerHTML += ` |`
+
+            for(let key in accumulatedData){
+                if(accumulatedData.hasOwnProperty(key)){
+                        accumulatedData[key] = accumulatedData[key] + lastData[key]
+
+                        document.querySelector('#total_calories').innerHTML = `${accumulatedData['calories']}kcal`;
+                        document.querySelector('#total_fat').innerHTML = `${accumulatedData['fat']}g`;
+                        document.querySelector('#total_protein').innerHTML = `${accumulatedData['protein']}g`;
+                        document.querySelector('#total_carbohydrates').innerHTML = `${accumulatedData['carbohydrates']}g`;
+                }
+            }
+        }
+        else{
+            let newListItem = document.createElement('li');
+            newListItem.textContent = `${document.querySelector('#single_summary_title').innerHTML} |`
+    
+            summaryList.appendChild(newListItem)
+        }
+    }
+    catch{
+        let newListItem = document.createElement('li');
+        newListItem.textContent = `${document.querySelector('#single_summary_title').innerHTML} |`
+    
+        summaryList.appendChild(newListItem)
+
+        document.querySelector('#total_calories').innerHTML = `${accumulatedData['calories']}kcal`;
+        document.querySelector('#total_fat').innerHTML = `${accumulatedData['fat']}g`;
+        document.querySelector('#total_protein').innerHTML = `${accumulatedData['protein']}g`;
+        document.querySelector('#total_carbohydrates').innerHTML = `${accumulatedData['carbohydrates']}g`;
+    }
+});
+
+
+// RESET SUMMARY LIST
+let resetBtn = document.querySelector('#reset_summary_btn');
+
+resetBtn.addEventListener('click', function(){
+    let summaryList = document.querySelector('.products_list_ul');
+    summaryList.innerHTML = '';
+
+    accumulatedData = {
+        fat: 0,
+        saturatedFat: 0,
+        cholesterol: 0,
+        sodium: 0,
+        carbohydrates: 0,
+        fiber: 0,
+        sugars: 0,
+        protein: 0,
+        calcium: 0,
+        iron: 0,
+        calories: 0
+    };
+
+    document.querySelector('#total_calories').innerHTML = `${accumulatedData['calories']}kcal`;
+    document.querySelector('#total_fat').innerHTML = `${accumulatedData['fat']}g`;
+    document.querySelector('#total_protein').innerHTML = `${accumulatedData['protein']}g`;
+    document.querySelector('#total_carbohydrates').innerHTML = `${accumulatedData['carbohydrates']}g`;
+
+    document.querySelector('#single_summary_title').innerHTML = ``;
+    document.querySelector('#fat').innerHTML = `0.0g`;
+    document.querySelector('#saturatedFat').innerHTML = `0.0g`;
+    document.querySelector('#cholesterol').innerHTML = `0.0mg`;
+    document.querySelector('#sodium').innerHTML = `0.0}mg`;
+    document.querySelector('#carbohydrates').innerHTML = `0.0g`;
+    document.querySelector('#fiber').innerHTML = `0.0g`;
+    document.querySelector('#sugars').innerHTML = `0.0g`;
+    document.querySelector('#protein').innerHTML = `0.0g`;
+    document.querySelector('#calcium').innerHTML = `0.0mg`;
+    document.querySelector('#iron').innerHTML = `0.0mg`;
+    document.querySelector('#calories').innerHTML = `0.0kcal`;
 })
 
