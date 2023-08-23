@@ -8,6 +8,9 @@ const welcomeBtn2 = document.querySelector('#welcome_btn_2');
 const welcomeBtn3 = document.querySelector('#welcome_btn_3');
 
 const navLinkHome = document.querySelector('#nav-link-home');
+const navLinkGuide = document.querySelector('#nav-link-guide');
+const navLinkCounter = document.querySelector('#nav-link-counter');
+const navLinkNutrition = document.querySelector('#nav-link-nutrition');
 
 var returnButtons = document.querySelectorAll('.return_welcome');
 
@@ -27,7 +30,7 @@ welcomeBtn2.addEventListener('click', function(){
     welcomeContainer.style.zIndex = '-5';
 
     aboutContainer.style.transition = '0.3s ease-in all';
-    aboutContainer.style.opacity = '0.9';
+    aboutContainer.style.opacity = '1';
     aboutContainer.style.zIndex = '10';
 });
 
@@ -37,7 +40,7 @@ welcomeBtn3.addEventListener('click', function(){
     welcomeContainer.style.zIndex = '-5';
 
     educationContainer.style.transition = '0.3s ease-in all';
-    educationContainer.style.opacity = '0.9';
+    educationContainer.style.opacity = '1';
     educationContainer.style.zIndex = '10';
 });
 
@@ -56,7 +59,7 @@ function returnWelcome(){
     educationContainer.style.zIndex = '-5';
 
     welcomeContainer.style.transition = '0.3s ease-in all';
-    welcomeContainer.style.opacity = '0.9';
+    welcomeContainer.style.opacity = '1';
     welcomeContainer.style.zIndex = '10';
 };
 
@@ -76,6 +79,57 @@ return3.addEventListener('click', ()=>{
 
 navLinkHome.addEventListener('click', ()=>{
     returnWelcome()
+})
+navLinkGuide.addEventListener('click', ()=>{
+    welcomeContainer.style.transition = '0.3s ease-in all';
+    welcomeContainer.style.opacity = '0';
+    welcomeContainer.style.zIndex = '-5';
+
+    educationContainer.style.transition = '0.3s ease-in all';
+    educationContainer.style.opacity = '0';
+    educationContainer.style.zIndex = '-5';
+
+    appContainer.style.transition = '0.3s ease-in all';
+    appContainer.style.opacity = '0';
+    appContainer.style.zIndex = '-5';
+
+    aboutContainer.style.transition = '0.3s ease-in all';
+    aboutContainer.style.opacity = '1';
+    aboutContainer.style.zIndex = '10';
+})
+navLinkCounter.addEventListener('click', ()=>{
+    welcomeContainer.style.transition = '0.3s ease-in all';
+    welcomeContainer.style.opacity = '0';
+    welcomeContainer.style.zIndex = '-5';
+
+    educationContainer.style.transition = '0.3s ease-in all';
+    educationContainer.style.opacity = '0';
+    educationContainer.style.zIndex = '-5';
+
+    aboutContainer.style.transition = '0.3s ease-in all';
+    aboutContainer.style.opacity = '0';
+    aboutContainer.style.zIndex = '-5';
+
+    appContainer.style.transition = '0.3s ease-in all';
+    appContainer.style.opacity = '1';
+    appContainer.style.zIndex = '10';
+})
+navLinkNutrition.addEventListener('click', ()=>{
+    welcomeContainer.style.transition = '0.3s ease-in all';
+    welcomeContainer.style.opacity = '0';
+    welcomeContainer.style.zIndex = '-5';
+
+    aboutContainer.style.transition = '0.3s ease-in all';
+    aboutContainer.style.opacity = '0';
+    aboutContainer.style.zIndex = '-5';
+
+    appContainer.style.transition = '0.3s ease-in all';
+    appContainer.style.opacity = '0';
+    appContainer.style.zIndex = '-5';
+
+    educationContainer.style.transition = '0.3s ease-in all';
+    educationContainer.style.opacity = '1';
+    educationContainer.style.zIndex = '10';
 })
 
 
